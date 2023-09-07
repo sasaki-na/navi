@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>観光ナビサイト</title>
   <style>
-    /* スタイルの定義 */
+
     .card {
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -37,8 +37,9 @@
       <button id="send" style="display: none;">送信</button>
     </div>
     <br>
-    <div id="output" style="overflow: auto; height:300px; "></div>
+    <div id="output" style="overflow: auto;"></div>
   </div>
+  <br>
 
   <!-- 特定の箱（ドロップ可能エリア）を定義 -->
   <div class="drop-area" id="drop-area-1">Box 1</div>
@@ -64,17 +65,17 @@
       {
         name: '観光地1',
         description: '観光地1の説明文です。',
-        image: 'img/sample.png',
+        //image: 'img/sample.png',
       },
       {
         name: '観光地2',
         description: '観光地2の説明文です。',
-        image: 'img/sample.png',
+        //image: 'img/sample.png',
       },
       {
         name: '観光地3',
         description: '観光地3の説明文です。',
-        image: 'img/sample.png',
+        //image: 'img/sample.png',
       },
     ];
 
@@ -131,6 +132,23 @@
       const sendButton = document.getElementById('send');
       sendButton.click();
     }
+
+    // WebSocketサーバーのURL
+const serverUrl = 'ws://localhost:3000';
+
+// WebSocket接続の確立
+const socket = new WebSocket(serverUrl);
+
+// ドラッグアンドドロップの操作などをトリガーした際に、PCにデータを送信
+function sendDataToPC(data) {
+  socket.send(data);
+}
+
+// WebSocketサーバーからメッセージを受信したら、適切な処理を実行
+socket.addEventListener('message', (event) => {
+  const receivedData = event.data;
+  // スマートフォン上での操作に基づいて表示を更新
+});
 
   </script>
 
